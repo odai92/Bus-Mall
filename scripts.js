@@ -24,6 +24,8 @@ function Product(name,image){
     
 
     pushArray.push(this);
+
+    storeData();
 }
 
 new Product('banana','banana.jpg');
@@ -221,6 +223,17 @@ function checkImage(theIndicator) {
       }
   }
 
+  function storeData() { // to store data from the array took from object
+    localStorage.setItem('order', JSON.stringify(pushArray));
+  }
+
+  function checkAndRestore (){
+    if(localStorage.length > 0){
+      pushArray = JSON.Parse(localStorage.getItem('order'));
+      // here i have to put the render function
+    }
+  }
+
 
   pickImage();
   var imageSection = document.getElementById('myMall');
@@ -232,6 +245,9 @@ function checkImage(theIndicator) {
   var my_mall = document.getElementById('mall_click');
   console.log(mall_click);
   imageButton.addEventListener('click',checkImage)
+
+
+  checkAndRestore ();
   // mall_click.addEventListener('click', function(){
   //   var ul = document.createElement('ul');
   //   var section = document.getElementById("listId");
