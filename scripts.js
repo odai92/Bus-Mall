@@ -75,7 +75,7 @@ function renderChart() {
   for(var index = 0; index < pushArray.length; index++){
     arrayOfImageNames.push(pushArray[index].name);
     arrayOfImageCount.push(pushArray[index].counter);
-    arrayOfImageShown.push(pushArray[index].numberOfTimesShown);
+    arrayOfImageShown.push(pushArray[index].timeShown);
   }
   
   var myChart = new Chart(imageCanvas, {
