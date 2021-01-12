@@ -1,0 +1,36 @@
+section h1 {
+  height: auto;
+  width: auto;
+  text-align: center;
+}
+
+body {
+  background-color: grey;
+  align-content: center;
+  margin: 10px 10px 10px 10px;
+}
+
+header {
+  text-align: center;
+  font-size: larger;
+  text-shadow: 2px 2px gold;
+  color: brown;
+}
+
+img {
+  width: 33%;
+  height: 400;
+  float: left;
+  padding: 5px;
+}
+
+footer div {
+  text-align: center;
+  align-content: center;
+  color: chocolate;
+  background-color: darkslategray;
+}
+
+text {
+  text-align: left;
+}
