@@ -28,6 +28,8 @@ function Product(name,image){
     storeData();
 }
 
+// i have to get the results after clicking on the image so for each image i click should give me the shown and clicked and if not clicked how many shown, i want it to start storing once i click or see the image so to do that i have to call the storedata function after getting the results so it will be at checkimage function
+
 new Product('banana','banana.jpg');
 new Product('bathroom','bathroom.jpg');
 new Product('boots','boots.jpg');
@@ -86,7 +88,7 @@ function renderChart() {
       labels: arrayOfImageNames, 
       datasets: [
         {
-        label: '# of Goat Clicks',
+        label: '# of Image Clicks',
         data: arrayOfImageCount, 
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -107,7 +109,7 @@ function renderChart() {
         borderWidth: 1
       },
       {
-        label: 'Time shown for the Goat',
+        label: 'Time shown for the Image',
         data: arrayOfImageShown,  
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -214,6 +216,7 @@ function checkImage(theIndicator) {
             li.textContent = pushArray[index].name + '/'+ 'counter:' + pushArray[index].counter + '/' + 'Time shown:~' + pushArray[index].timeShown
             ul.appendChild(li);
             renderChart();
+            storeData();
           }
       
         });
@@ -229,7 +232,7 @@ function checkImage(theIndicator) {
 
   function checkAndRestore (){
     if(localStorage.length > 0){
-      pushArray = JSON.Parse(localStorage.getItem('order'));
+      pushArray = JSON.parse(localStorage.getItem('order'));
       // here i have to put the render function
     }
   }
