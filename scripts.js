@@ -8,7 +8,9 @@ var bananaLeft = document.getElementById('left_image');
 var bathroomLeft = document.getElementById('bottom_image');
 var bootsLeft = document.getElementById('right_image');
 var votingRounds = 25;
-
+var imageButton = document.getElementById('mall_click')
+var imageCanvas = document.getElementById('imageChart').getContext('2d');
+var shownImages = [];
 
 
 
@@ -64,6 +66,88 @@ function renderImage(leftImage, bottomImage, rightImage){
 
 }
 
+function renderChart() {
+
+  var arrayOfImageNames = [];
+  var arrayOfImageCount = [];
+  var arrayOfImageShown = [];
+
+  for(var index = 0; index < pushArray.length; index++){
+    arrayOfImageNames.push(pushArray[index].name);
+    arrayOfImageCount.push(pushArray[index].counter);
+    arrayOfImageShown.push(pushArray[index].numberOfTimesShown);
+  }
+  
+  var myChart = new Chart(imageCanvas, {
+    type: 'bar',
+    data: {
+      labels: arrayOfImageNames, 
+      datasets: [
+        {
+        label: '# of Goat Clicks',
+        data: arrayOfImageCount, 
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: 'Time shown for the Goat',
+        data: arrayOfImageShown,  
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+function checkAvailability (selectedImageName) {
+
+  for (var index = 0; index < shownImages.length; index++) {
+    if (shownImages[index].name === selectedImageName) {
+      return true;
+    }
+  }
+  return false;  
+}
+
 
 function pickImage(){
     var leftImage = Math.round(Math.random() * (pushArray.length -1)) 
@@ -73,6 +157,7 @@ function pickImage(){
 
     } while (leftImage === bottomImage || bottomImage === rightImage || leftImage === rightImage);
 
+  
     renderImage(leftImage , bottomImage, rightImage);
     
 }
@@ -126,7 +211,7 @@ function checkImage(theIndicator) {
             var li = document.createElement('li');
             li.textContent = pushArray[index].name + '/'+ 'counter:' + pushArray[index].counter + '/' + 'Time shown:~' + pushArray[index].timeShown
             ul.appendChild(li);
-            
+            renderChart();
           }
       
         });
@@ -136,15 +221,17 @@ function checkImage(theIndicator) {
       }
   }
 
+
+  pickImage();
   var imageSection = document.getElementById('myMall');
 
-  
-  
 
   imageSection.addEventListener('click',countImage);
 
+
   var my_mall = document.getElementById('mall_click');
   console.log(mall_click);
+  imageButton.addEventListener('click',checkImage)
   // mall_click.addEventListener('click', function(){
   //   var ul = document.createElement('ul');
   //   var section = document.getElementById("listId");
@@ -157,4 +244,4 @@ function checkImage(theIndicator) {
   //   }
 
   // });
-  pickImage();
+ 
