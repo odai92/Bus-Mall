@@ -14,7 +14,7 @@ var shownImages = [];
 
 
 
-
+// constructer take the image url and its name,,
 function Product(name,image){
     this.name = name;
     this.image = image
@@ -28,8 +28,13 @@ function Product(name,image){
     storeData();
 }
 
+
+// what was on my mind when i wanted to save the data:~
 // i have to get the results after clicking on the image so for each image i click should give me the shown and clicked and if not clicked how many shown, i want it to start storing once i click or see the image so to do that i have to call the storedata function after getting the results so it will be at checkimage function
 
+
+
+// images were added to the constructer as object
 new Product('banana','banana.jpg');
 new Product('bathroom','bathroom.jpg');
 new Product('boots','boots.jpg');
@@ -53,6 +58,8 @@ new Product('wine-glass','wine-glass.jpg');
 
 
 
+// a function to get the values of the images
+
 function renderImage(leftImage, bottomImage, rightImage){
   bananaLeftText.textContent = pushArray[leftImage].name;
   bathroomLeftText.textContent = pushArray[bottomImage].name;
@@ -70,6 +77,8 @@ function renderImage(leftImage, bottomImage, rightImage){
 
 }
 
+
+// a function to create the chart and its data
 function renderChart() {
 
   var arrayOfImageNames = [];
@@ -142,6 +151,9 @@ function renderChart() {
   });
 }
 
+
+
+
 function checkAvailability (selectedImageName) {
 
   for (var index = 0; index < shownImages.length; index++) {
@@ -152,6 +164,7 @@ function checkAvailability (selectedImageName) {
   return false;  
 }
 
+// a function to generate a random image and not to select the same image showing one time togther 
 
 function pickImage(){
     var leftImage = Math.round(Math.random() * (pushArray.length -1)) 
@@ -166,6 +179,8 @@ function pickImage(){
     
 }
 
+
+// here to select the image and count it
 function checkImage(theIndicator) {
     for (var index = 0; index < pushArray.length; index++) {
       
@@ -178,6 +193,8 @@ function checkImage(theIndicator) {
     
   }
 
+// here how many time the image was shown
+
   function timeShown(object){
     for(var index= 0; index < pushArray.length ;index++ ){
       if(pushArray[index].url === object){
@@ -186,7 +203,7 @@ function checkImage(theIndicator) {
     }
   }
 
-
+// counting the image 
 
   function countImage (event){
     console.log(event.target.id);
@@ -226,6 +243,8 @@ function checkImage(theIndicator) {
       }
   }
 
+
+// storing the data by set item and json
   function storeData() { // to store data from the array took from object
     localStorage.setItem('order', JSON.stringify(pushArray));
   }
@@ -233,34 +252,27 @@ function checkImage(theIndicator) {
   function checkAndRestore (){
     if(localStorage.length > 0){
       pushArray = JSON.parse(localStorage.getItem('order'));
-      // here i have to put the render function
     }
   }
 
 
+// calling the function
+
   pickImage();
+
+// get the html element 
+
   var imageSection = document.getElementById('myMall');
 
+  // creating an event listener
 
   imageSection.addEventListener('click',countImage);
 
+  // an event listener for the click button and geting the element from html
 
   var my_mall = document.getElementById('mall_click');
   console.log(mall_click);
   imageButton.addEventListener('click',checkImage)
 
-
+// calling the function 
   checkAndRestore ();
-  // mall_click.addEventListener('click', function(){
-  //   var ul = document.createElement('ul');
-  //   var section = document.getElementById("listId");
-
-  //   section.appendChild(ul);
-  //   for(var index = 0; index<20;index++){
-  //     var li = document.createElement('li');
-  //     li.textContent = pushArray[index].name + '/'+ 'counter:' + pushArray[index].counter + '/' + 'Time shown:~' + pushArray[index].timeShown
-  //     ul.appendChild(li);
-  //   }
-
-  // });
- 
